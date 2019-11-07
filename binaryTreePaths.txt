@@ -28,5 +28,33 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3
  * @return {string[]}
  */
 var binaryTreePaths = function(root) {
-   if(roo)
+   if(root === null) return []
+   let allPaths = []
+   if(root.left){
+      treePathHelper(root.left,[root.val], allPaths)
+   }
+   if(root.right){
+      treePathHelper(root.right,[root.val], allPaths)
+   }
+   
+   let result = allPaths.map((arr) => return arr.join('->'))
+   return result
 };
+
+function treePathHelper(node,currArr, allPath){
+   if(node === null) {
+      allPath.push(currArr)
+      return allPath
+   }
+      currArr.push(node.val)
+      rightArr = currArr.concat()
+      treePathHelper(node.right, rightArr, allPath)
+  
+      let leftArr = currArr.concat()
+      treePathHelper(node.right, leftArr, allPath)
+      
+      return allPath
+}
+
+
+
