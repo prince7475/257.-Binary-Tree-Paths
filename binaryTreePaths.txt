@@ -27,32 +27,27 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3
  * @param {TreeNode} root
  * @return {string[]}
  */
+
 var binaryTreePaths = function(root) {
-   if(root === null) return []
-   let allPaths = []
-   treePathHelper(root, "", allPaths)
-   
-   return allPaths
+    if(root === null) return []
+    let allPaths = []
+    dfs(root, "", allPaths)
+    return allPaths
 };
 
-function treePathHelper(node, currPath, allPaths){
-   if(node === null){
-      allPaths.push(currPath)
-      return allPaths
+function dfs(node, currStr, allPaths){
+    currStr += node.val
+   if(node.left === null && node.right === null){
+      allPaths.push(currStr)
+      return
    }
    
-   currPath + node.val
    if(node.left){
-      treePathHelper(node.left, currPath + '->', allPaths)
+      dfs(node.left, currStr + '->', allPaths) 
    }
-   
    if(node.right){
-      treePathHelper(node.right, currPath + '->', allPaths)
+      dfs(node.right, currStr + '->', allPaths)
    }
-   
-
-   return allPaths
 }
-
 
 
